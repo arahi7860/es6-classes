@@ -9,17 +9,18 @@ competencies: Programming
 ---
 
 
-<!-- ### Objectives
+### Objectives
 *After this lesson, students will be able to:*
-- Define and identify recursion
-- Compare and contract the use of iteration over recursion
-- Use (linear) recursion to solve basic algorithms
-- Complete all of the learning objectives including this one (lol recursion)
+- Create classes and subclasses with ES6
+- Compare and contract the use of ES6 classes vs traditional patterns
+- Understand the `arguments` keyword and how to use it
+- Identify simple setters and getters as instance methods
 
 ### Preparation
-*Before this lesson, students should already be able to:*
-- Have a good understanding javascript and functions
-- Have practice with white-boarding and discussing algorithms -->
+*Before this lesson, students should already:*
+- Have a basic understanding of [this lecture](https://git.generalassemb.ly/wdi-nyc-delorean/LECTURE_U01_D08-prototype-inheritance)
+  - Understand `prototype`, `constructor`, inheritance
+- Have attempted the [corresponding lab](https://git.generalassemb.ly/wdi-nyc-delorean/LAB_U01_D08-prototype-inheritance)
 
 # ES6 Classes
 
@@ -299,6 +300,22 @@ Person.sentiment('poo');
 > Static functions you may recognize: `Object.create`, `Object.assign`, `Array.from`
 
 Avoid using the `this` keyword inside of static functions.  It will refer to the class itself, not any instance.  This can be a little confusing.
+
+## Why we learned the basics first
+
+ES6 classes are pretty cool.  So why did we learn the traditional pattern first?
+
+* ES6 does not have the same support ES5 does
+* Most JS libraries are *not* written in ES6 classes (for the reason above)
+  * [jQuery](http://code.jquery.com/jquery-3.2.1.js), [underscore](https://github.com/jashkenas/underscore/blob/master/underscore.js)
+* Without understanding prototypes, ES6 classes are just "magic"
+* We enjoy making you suffer
+* Understanding where functions live is helpful for writing good/efficient code and debugging
+* In the industry some teams use traditional styles, some use ES6 classes. You gotta know both
+
+## Resources
+
+* [What's new with ES6](https://medium.com/front-end-hacking/es6-vs-es5-9254f8390332)
 
 ## Conclusion
 - What are some differences to ES6 classes versus the patterns we have previously seen?
