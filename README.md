@@ -187,10 +187,15 @@ Normally when we see `obj.foo = 'bar'` we think "Just setting the `foo` property
 
 Almost never.  Bugs around setters and getters can be very hard to track down.  Most JS developers forget they even exist.  For anything more complex than the `fullName` example, do not use getters and setters.
 
+
+## Alternatives to getters and setters
+
 Prefer creating regular functions with a `getFullName`/`setFullName` pattern.
 
 ```javascript
 class Person {
+  // ...
+
   getFullName () {
     return this.firstName + ' ' + this.lastName;
   }
@@ -205,8 +210,62 @@ class Person {
 
 > NOTE: I am just smooshing `get fullName` into `getFullName` and `set fullName` into `setFullName`.
 
-We can also use the `jQuery` pattern of setting and getting.
+We can also use the `jQuery` pattern of setting and getting.  How?
 
+### Mini-Lesson: `arguments` keyword
+
+The [`arguments`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments) keyword can be referenced inside functions.  It is an array-_like_ object containing each argument passed into the function.  It has a `length` property referring to the number of arguments given.
+
+`arguments` **cannot** be used inside of arrow functions.
+
+```javascript
+var foo = function () {
+  console.log(`length: ${arguments.length}`);
+
+  for(let i = 0; i < arguments.length; i++) {
+    console.log(`argument ${i}: ${arguments[i]}`)
+  }
+};
+
+foo('stacey', 'tracey');
+// length: 2
+// argument 0: stacey
+// argument 1: tracey
+```
+
+Remember, `arguments` is an object, not an array, which means we cannot call array methods on it. (e.g there is no `arguments.forEach`).  If you _need_ an array out of the `arguments`, MDN has a couple suggestions:
+
+```javascript
+function () {
+  var args = Array.prototype.slice.call(arguments);
+
+  // OR
+  var args = [].slice.call(arguments);
+
+  // OR
+  var args = Array.from(arguments);
+}
+```
+
+`</Mini-Lesson>`
+
+So we can take inspiration from `jQuery` give our functions different behaviors depending on the number of arguments given.
+
+```javascript
+class Person {
+  // ...
+
+  fullName () {
+    if (arguments.length === 0) {
+      return getFullName();
+    } else {
+      setFullName(arguments[0]);
+    }
+  }
+}
+```
+
+Interesting.
 <!-- ## Conclusion
 - When would we prefer to use recursion over iteration?
 - How does recursion actually work?
