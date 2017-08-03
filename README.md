@@ -62,7 +62,7 @@ What we see above is exactly equivalent. This is just nicer syntax introduced in
 
 ### ES5
 
-To create subclasses we've got our hands dirty. (A little less dirty when we use [helper function](https://git.generalassemb.ly/wdi-nyc-delorean/LAB_U01_D08-prototype-inheritance/blob/master/inheritance.js))
+To create subclasses we've got our hands dirty. (A little less dirty when we use [this helper function](https://git.generalassemb.ly/wdi-nyc-delorean/LAB_U01_D08-prototype-inheritance/blob/master/inheritance.js))
 
 ```javascript
 Programmer = function (firstName, lastName, options) {
@@ -263,10 +263,45 @@ class Person {
     }
   }
 }
+
+person.fullName() // => 'Doc Brown'
+person.fullName('Emmett Brown');
+person.fullName() // => 'Emmett Brown'
 ```
 
-Interesting.
-<!-- ## Conclusion
-- When would we prefer to use recursion over iteration?
-- How does recursion actually work?
-- What is needed to insure we don't recurse forever? -->
+How does this make you feel?
+
+
+## Defining static functions
+
+Static functions are those that live on the constructor, not the prototype or any instance.  They are used for things related to the class, but not any particular instance.
+
+
+```javascript
+class Person {
+  /// ...
+
+  static sentiment (thing) {
+    if (thing === 'poo' || thing === `spiders`) {
+      console.log(`People do not like ${thing}`);
+    } else {
+      console.log(`People love ${thing}!`);
+    }
+  }
+}
+
+Person.sentiment('flowers');
+// => 'People love flowers!'
+Person.sentiment('poo');
+// => 'People do not like poo'
+```
+
+> Static functions you may recognize: `Object.create`, `Object.assign`, `Array.from`
+
+Avoid using the `this` keyword inside of static functions.  It will refer to the class itself, not any instance.  This can be a little confusing.
+
+## Conclusion
+- What are some differences to ES6 classes versus the patterns we have previously seen?
+- What are getters and setters? How can we get around using them?
+- What type of object is `arguments`? How can we use it?
+- What is the difference between static methods and instance methods?
