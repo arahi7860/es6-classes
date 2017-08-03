@@ -24,7 +24,7 @@ competencies: Programming
 
 # ES6 Classes
 
-ES6 Classes are the new school way of writing `constructors` and methods on the `prototype`.  Let's see how this works.
+[ES6 Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) are the new school way of writing `constructors` and methods on a `prototype`.  Let's see how this works.
 
 ### ES5
 
@@ -67,9 +67,9 @@ To create subclasses we've got our hands dirty. (A little less dirty when we use
 
 ```javascript
 Programmer = function (firstName, lastName, options) {
+  Person.call(this, firstName, lastName);
   this.githubHandle = options.githubHandle;
   this.website = options.website;
-  Person.call(this, firstName, lastName);
 };
 
 inheritPrototype(Person, Programmer);
@@ -93,9 +93,9 @@ With ES6 this is super easy.  We simply use the [`extends`](https://developer.mo
 // Programmer is inheriting from Person
 class Programmer extends Person {
   constructor (firstName, lastName, options) {
+    super(firstName, lastName);
     this.githubHandle = options.githubHandle;
     this.website = options.website;
-    super(firstName, lastName);
   }
 
   getResume () {
@@ -108,7 +108,10 @@ class Programmer extends Person {
 }
 ```
 
-Pretty shweet, huh?
+Notice we just call `super(firstName, lastName)` rather than `Person.call(this, firstName, lastName)`. Simple.
+
+**Important**: You must call `super` before accessing the `this` keyword. (Or you will get a nice `ReferenceError`)
+
 
 We can actually call `super` in any instance method.
 
@@ -234,6 +237,9 @@ foo('stacey', 'tracey');
 // argument 1: tracey
 ```
 
+In the above example, `arguments` looks like `{0: 'stacey', 1: 'tracey', length: 2}`
+
+
 Remember, `arguments` is an object, not an array, which means we cannot call array methods on it. (e.g there is no `arguments.forEach`).  If you _need_ an array out of the `arguments`, MDN has a couple suggestions:
 
 ```javascript
@@ -307,7 +313,7 @@ ES6 classes are pretty cool.  So why did we learn the traditional pattern first?
 
 * ES6 does not have the same support ES5 does
 * Most JS libraries are *not* written in ES6 classes (for the reason above)
-  * [jQuery](http://code.jquery.com/jquery-3.2.1.js), [underscore](https://github.com/jashkenas/underscore/blob/master/underscore.js)
+  * [jQuery](http://code.jquery.com/jquery-3.2.1.js), [underscore](https://github.com/jashkenas/underscore/blob/master/underscore.js), etc.
 * Without understanding prototypes, ES6 classes are just "magic"
 * We enjoy making you suffer
 * Understanding where functions live is helpful for writing good/efficient code and debugging
@@ -318,6 +324,7 @@ ES6 classes are pretty cool.  So why did we learn the traditional pattern first?
 * [MDN `class` docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 * [What's new with ES6](https://medium.com/front-end-hacking/es6-vs-es5-9254f8390332)
 * `Prototype`/`Constructor` [lecture](https://git.generalassemb.ly/wdi-nyc-delorean/LECTURE_U01_D08-prototype-inheritance) and [lab](https://git.generalassemb.ly/wdi-nyc-delorean/LAB_U01_D08-prototype-inheritance)
+* [`get`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get) and [`set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set)
 
 ## Conclusion
 - What are some differences to ES6 classes versus the patterns we have previously seen?

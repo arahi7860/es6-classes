@@ -9,7 +9,7 @@ class Person {
     console.log(`Hi ${other.firstName}, I am ${this.firstName}`);
   }
 
-  // get and setter below (but we don't want them)
+  // get and setter below (commented out because we are using a different approach)
 
   // get fullName() {
   //   console.log('getting')
@@ -23,6 +23,8 @@ class Person {
   //   this.lastName = names[1];
   // }
 
+  // better pattern:
+
   getFullName () {
     return this.firstName + ' ' + this.lastName;
   }
@@ -30,7 +32,7 @@ class Person {
   setFullName (val) {
     var names = val.split(' ');
     this.firstName = names[0];
-    this.lastName = names[1];
+    this.lastName = names[1]; // what if there are more than two names given? how can we fix this? eg. 'David Heinemeier Hansson'
   }
 
   fullName () {
@@ -49,3 +51,36 @@ class Person {
     }
   }
 }
+
+
+class Programmer extends Person {
+  constructor (firstName, lastName, options) {
+    this.githubHandle = options.githubHandle;
+    this.website = options.website;
+    super(firstName, lastName);
+  }
+
+  getResume () {
+    return (
+      this.firstName + ' ' + this.lastName +
+      '\n' + 'Github: ' + this.githubHandle +
+      '\n' + 'Website: ' + this.website
+    );
+  }
+
+  sayHiTo (other) {
+    super.sayHiTo(other);
+    console.log('I AM A PROGRAMMER!');
+  }
+}
+
+// sandbox
+
+var person = new Person('Stacey', 'Mae');
+
+var programmer = new Programmer('David', 'Heinemeier Hansson', {
+  website: 'david.heinemeierhansson.com',
+  githubHandle: 'dhh'
+});
+
+programmer.sayHiTo(person);
