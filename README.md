@@ -315,7 +315,9 @@ ES6 classes are pretty cool.  So why did we learn the traditional pattern first?
 
 ## Resources
 
+* [MDN `class` docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 * [What's new with ES6](https://medium.com/front-end-hacking/es6-vs-es5-9254f8390332)
+* `Prototype`/`Constructor` [lecture](https://git.generalassemb.ly/wdi-nyc-delorean/LECTURE_U01_D08-prototype-inheritance) and [lab](https://git.generalassemb.ly/wdi-nyc-delorean/LAB_U01_D08-prototype-inheritance)
 
 ## Conclusion
 - What are some differences to ES6 classes versus the patterns we have previously seen?
