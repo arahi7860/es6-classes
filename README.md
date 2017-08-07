@@ -280,7 +280,7 @@ person.fullName('Emmett Brown');
 person.fullName() // => 'Emmett Brown'
 ```
 
-How does this make you feel?
+This is an interesting pattern that is used in some APIs.  But you probably don't need it when writing code for yourself.
 
 
 ## Defining static functions

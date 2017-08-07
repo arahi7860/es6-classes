@@ -55,9 +55,9 @@ class Person {
 
 class Programmer extends Person {
   constructor (firstName, lastName, options) {
+    super(firstName, lastName);
     this.githubHandle = options.githubHandle;
     this.website = options.website;
-    super(firstName, lastName);
   }
 
   getResume () {
