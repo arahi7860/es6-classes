@@ -12,13 +12,13 @@ competencies: Programming
 ### Objectives
 *After this lesson, students will be able to:*
 - Create classes and subclasses with ES6
-- Compare and contract the use of ES6 classes vs traditional patterns
+- Compare and contrast the use of ES6 classes vs traditional patterns
 - Understand the `arguments` keyword and how to use it
 - Identify simple setters and getters as instance methods
 
 ### Preparation
 *Before this lesson, students should already:*
-- Have a basic understanding of [this lecture](https://git.generalassemb.ly/wdi-nyc-delorean/LECTURE_U01_D08-prototype-inheritance)
+- Have a good understanding of the [Prototype Inheritance lecture](https://git.generalassemb.ly/wdi-nyc-delorean/LECTURE_U01_D08-prototype-inheritance)
   - Understand `prototype`, `constructor`, inheritance
 - Have attempted the [corresponding lab](https://git.generalassemb.ly/wdi-nyc-delorean/LAB_U01_D08-prototype-inheritance)
 
