@@ -319,6 +319,27 @@ ES6 classes are pretty cool.  So why did we learn the traditional pattern first?
 * Understanding where functions live is helpful for writing good/efficient code and debugging
 * In the industry some teams use traditional styles, some use ES6 classes. You gotta know both
 
+## Mini-mini-lesson: [Spread Syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)
+
+ES6 also introduced a nice way of "spreading" arrays.  It can be used to spread out function arguments or spread out an array into another.
+
+```javascript
+var arr = [3, 4, 5];
+
+someFunc(...arr);
+// => someFunc(3, 4, 5)
+// different than someFunc([3, 4, 5])
+
+[1, 2, ...arr, 6, 7];
+// => [1, 2, 3, 4, 5, 6, 7]
+// different than [1, 2, [3, 4, 5], 6, 7]
+```
+
+
+## Lab
+
+[Do it](https://git.generalassemb.ly/wdi-nyc-delorean/LAB_U03_D01_ES6-Classes)
+
 ## Resources
 
 * [MDN `class` docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
