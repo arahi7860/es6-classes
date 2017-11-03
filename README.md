@@ -207,6 +207,7 @@ class Person {
     return new Date(this.birthday).toDateString();
   }
 }
+```
 
 > NOTE: Getters should only be used for simple functions that can execute quickly. (In constant time)
 
@@ -242,7 +243,7 @@ Carefully.  Bugs around setters and getters can be very hard to track down, so t
 
 ## Alternatives to getters and setters
 
-Prefer creating regular functions with a `getFullName`/`setFullName` pattern.
+As an alternative, we can also create regular functions with a `getFullName`/`setFullName` pattern.  Although, this pattern slightly obscures the underlying intent of expositing straightforward getter and setter methods.
 
 ```javascript
 class Person {
