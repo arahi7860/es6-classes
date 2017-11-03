@@ -7,14 +7,40 @@ creator:
     city: NY
 competencies: Programming
 ---
+### Hook
+*Replaces clunkier pattern/strategy covered earlier in classes*
+- more user-friendly semantics/syntax
+- ask if people used prototypes, why or why not?
+
+*Common pattern across programming*
+
+*Similar to radio shorthand for submarines communicating to amongst themsleves*
+
+*comparable to biological cells with walls that communicate with chemical messages*
+
+*seamless organization of data and behavior that "pulls" your thinking into a more naturally organized structure*
+
+*where do conversations/topics begin to take shape organically?*
+
+
 
 
 ### Objectives
 *After this lesson, students will be able to:*
 - Create classes and subclasses with ES6
+
+- Effectively use classes with ES6 to organize a code problem
+- Confidently use getters/setters, instance methods, static methods, and define new classes
+
+
 - Compare and contrast the use of ES6 classes vs traditional patterns
-- Understand the `arguments` keyword and how to use it
+- Identify advantages of classes over prototypes
+
+- Explain what the `arguments` keyword provides and provide an example use classes
+
 - Identify simple setters and getters as instance methods
+- Identify examples wherein to use getters/setters
+
 
 ### Preparation
 *Before this lesson, students should already:*
@@ -215,47 +241,6 @@ class Person {
 > NOTE: I am just smooshing `get fullName` into `getFullName` and `set fullName` into `setFullName`.
 
 We can also use the `jQuery` pattern of setting and getting.  How?
-
-### Mini-Lesson: `arguments` keyword
-
-The [`arguments`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments) keyword can be referenced inside functions.  It is an array-_like_ object containing each argument passed into the function.  It has a `length` property referring to the number of arguments given.
-
-`arguments` **cannot** be used inside of arrow functions.
-
-```javascript
-var foo = function () {
-  console.log(`length: ${arguments.length}`);
-
-  for(let i = 0; i < arguments.length; i++) {
-    console.log(`argument ${i}: ${arguments[i]}`)
-  }
-};
-
-foo('stacey', 'tracey');
-// length: 2
-// argument 0: stacey
-// argument 1: tracey
-```
-
-In the above example, `arguments` looks like `{0: 'stacey', 1: 'tracey', length: 2}`
-
-
-Remember, `arguments` is an object, not an array, which means we cannot call array methods on it. (e.g there is no `arguments.forEach`).  If you _need_ an array out of the `arguments`, MDN has a couple suggestions:
-
-```javascript
-function () {
-  var args = Array.prototype.slice.call(arguments);
-
-  // OR
-  var args = [].slice.call(arguments);
-
-  // OR
-  var args = Array.from(arguments);
-}
-```
-`arguments` is _not_ new to ES6 (you just may have not seen it yet) so you an use it outside of ES6.
-
-> As an alternative to `arguments` you may also use [rest parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters) which _is_ new to ES6.
 
 
 `</Mini-Lesson>`
