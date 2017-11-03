@@ -1,12 +1,5 @@
----
-title: ES6 classes
-type: lesson
-duration: "2:30"
-creator:
-    name: Ari Brenner
-    city: NY
-competencies: Programming
----
+# ES6 Classes  
+# Whoa
 
 ![cell](cell.gif)
 
@@ -264,6 +257,10 @@ class Person {
 > NOTE: I am just smooshing `get fullName` into `getFullName` and `set fullName` into `setFullName`.
 
 
+## Lab
+Clone this repo and navigate to the `classes_lab` sub-directory.
+Follow the instructions in the README and get some practice with ES6 Classes using shapes.
+
 ## Defining static functions
 
 Static functions are those that live on the constructor, not the prototype or any instance.  They are used for things related to the class, but not any particular instance.
@@ -291,6 +288,54 @@ Person.sentiment('poo');
 > Static functions you may recognize: `Object.create`, `Object.assign`, `Array.from`
 
 Avoid using the `this` keyword inside of static functions.  It will refer to the class itself, not any instance.  This can be a little confusing.
+
+## Function.Prototype.bind()
+From mdn:
+
+> The bind() method creates a new function that, when called, has its this keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
+
+Consider the following example:
+
+```javascript
+class Person {
+  constructor() {
+    this.species = 'Human';
+  }
+
+  greet() {
+    console.log(`Hey There, I'm a ${this.species}`);
+  }
+}
+
+const drake = new Person();
+
+drake.greet();
+// => Hey There, I'm a Human
+
+let humanGreeter = drake.greet; // note: this function is not being executed
+
+// humanGreeter();
+// => throws an error
+
+humanGreeter = drake.greet.bind(drake);
+// => Hey There, I'm a Human
+
+class Dog {
+  constructor() {
+    this.species = 'Canine';
+  }
+}
+
+const peggySue = new Dog();
+const doggyGreeter = drake.greet.bind(peggySue);
+
+doggyGreeter();
+// => Hey There, I'm a Canine
+```
+
+`bind` becomes especially important when transferring behavior from a class method into a callback in a context where the class no longer available
+
+What would happen if we passed `drake.greet` as a callback without `bind`ing an object to it?
 
 ## Why we learned the basics first
 
@@ -320,10 +365,6 @@ someFunc(...arr);
 // different than [1, 2, [3, 4, 5], 6, 7]
 ```
 
-
-## Lab
-
-[Do it](https://git.generalassemb.ly/wdi-nyc-delorean/LAB_U03_D01_ES6-Classes)
 
 ## Resources
 
