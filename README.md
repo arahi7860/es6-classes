@@ -7,39 +7,17 @@ creator:
     city: NY
 competencies: Programming
 ---
-### Hook
-*Replaces clunkier pattern/strategy covered earlier in classes*
-- more user-friendly semantics/syntax
-- ask if people used prototypes, why or why not?
 
-*Common pattern across programming*
-
-*Similar to radio shorthand for submarines communicating to amongst themsleves*
-
-*comparable to biological cells with walls that communicate with chemical messages*
-
-*seamless organization of data and behavior that "pulls" your thinking into a more naturally organized structure*
-
-*where do conversations/topics begin to take shape organically?*
-
-
-
+![cell](cell.gif)
 
 ### Objectives
 *After this lesson, students will be able to:*
 - Create classes and subclasses with ES6
-
-- Effectively use classes with ES6 to organize a code problem
-- Confidently use getters/setters, instance methods, static methods, and define new classes
-
-
-- Compare and contrast the use of ES6 classes vs traditional patterns
-- Identify advantages of classes over prototypes
-
-- Explain what the `arguments` keyword provides and provide an example use classes
-
-- Identify simple setters and getters as instance methods
-- Identify examples wherein to use getters/setters
+- Define and use getter and setter methods
+- Explain the advantages of ES6 classes over Object prototypes
+- Identify at least 2 use cases for getter/setter methods
+- Define and use class methods
+- Distinguish static methods from standard  methods
 
 
 ### Preparation
@@ -55,11 +33,15 @@ competencies: Programming
 ### ES5
 
 ```javascript
+// object properties / data attributes are conventionally
+// declared and attached to the object in the constructor
 var Person = function (firstName, lastName) {
   this.firstName = firstName;
   this.lastName = lastName;
 };
 
+// member methods on the object are attached to the prototype object
+// after defining a constructor
 Person.prototype.sayHiTo = function (other) {
   console.log(`Hi ${other.firstName}, I am ${this.firstName}`);
 };
@@ -85,13 +67,34 @@ class Person {
 
 What we see above is exactly equivalent. This is just nicer syntax introduced in ES6.
 
+### Short Practice (10 min)
+- Open a node REPL
+- Copy and paste the above `Person` class into the REPL
+- define two person objects and make one `sayHiTo` the other
+- Bonus: define a `getFullName` method that prints out the `Person`'s full name to the console and then call it
+
+
 ## Class inheritance
 
 ### ES5
 
-To create subclasses we've got our hands dirty. (A little less dirty when we use [this helper function](https://git.generalassemb.ly/wdi-nyc-delorean/LAB_U01_D08-prototype-inheritance/blob/master/inheritance.js))
+To create subclasses we've got our hands dirty. (A little less dirty when we use a helper function which wraps `Object.create`, an updated mechanism for generating new prototypes/objects.
 
 ```javascript
+/**
+ * Makes Subclass constructor a subclass of Superclass constructor
+ * @param {Function} Subclass
+ * @param {Function} Superclass
+ * @return undefined
+ */
+window.inheritPrototype = function (Subclass, Superclass) {
+  // set Subclass's prototype to a copy of Superclass's prototype
+  Subclass.prototype = Object.create(Superclass.prototype);
+
+  // set the constructor property to Subclass (otherwise it will be Superclass)
+  Subclass.prototype.constructor = Subclass;
+};
+
 Programmer = function (firstName, lastName, options) {
   Person.call(this, firstName, lastName);
   this.githubHandle = options.githubHandle;
@@ -109,7 +112,6 @@ Programmer.prototype.getResume = function () {
 };
 ```
 
-> Refer back to [this lecture](https://git.generalassemb.ly/wdi-nyc-delorean/LECTURE_U01_D08-prototype-inheritance) if this does not look familiar.
 
 ### ES6
 
@@ -162,6 +164,13 @@ programmer.sayHiTo(stacey);
 // I AM A PROGRAMMER!
 ```
 
+## Be careful with `extends`
+In practice, you should be cautious about using `extends` and class inheritance in general.  Collective industry experience across multiple languages, problem domains, and platforms strongly suggests that deep class hierarchies yield rigid, fragile code that is quite difficult to understand and work with.  Conventional wisdom favors [object composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance).
+
+So when should `extends` be used?  Class inheritance turns out to be quite an effective semantic structure for interfacing with libraries and frameworks provided to you as a developer when building larger projects.  We need `extends` in order to leverage functionality built into several frameworks, e.g., `React`, seamlessly.  
+
+As a rule of thumb, never fear `extends` when subclassing from a class or object explicitly provided by a framework, but think twice before extending classes you yourself have written.
+
 ## Getters and Setters
 
 With ES6, we can also easily define `getter`s and `setter`s.
@@ -185,6 +194,19 @@ person.fullName // => 'Marty McFly'
 ```
 
 We just called a function without using parens!
+
+Also, consider parsing a person's birthday in a getter
+
+```javascript
+class Person {
+  // ...
+
+  get birthday() {
+    // birthday here something akin to:
+    // 2017-11-03 09:26:10.540739-04
+    return new Date(this.birthday).toDateString();
+  }
+}
 
 > NOTE: Getters should only be used for simple functions that can execute quickly. (In constant time)
 
@@ -215,7 +237,7 @@ Normally when we see `obj.foo = 'bar'` we think "Just setting the `foo` property
 
 ### When should we use setters and getters?
 
-Almost never.  Bugs around setters and getters can be very hard to track down.  Most JS developers forget they even exist.  For anything more complex than the `fullName` example, do not use getters and setters.
+Carefully.  Bugs around setters and getters can be very hard to track down, so take care when implementing complex parsing or business logic operations inside getters or setters.  On the other hand, they can be very helpful for exposing manageable chunks of complex data objects without complicating the underlying representation of the domain model.  That's a mouthful to say, but will make more sense when working with more complicated apps.
 
 
 ## Alternatives to getters and setters
@@ -239,33 +261,6 @@ class Person {
 ```
 
 > NOTE: I am just smooshing `get fullName` into `getFullName` and `set fullName` into `setFullName`.
-
-We can also use the `jQuery` pattern of setting and getting.  How?
-
-
-`</Mini-Lesson>`
-
-So we can take inspiration from `jQuery` give our functions different behaviors depending on the number of arguments given.
-
-```javascript
-class Person {
-  // ...
-
-  fullName () {
-    if (arguments.length === 0) {
-      return getFullName();
-    } else {
-      setFullName(arguments[0]);
-    }
-  }
-}
-
-person.fullName() // => 'Doc Brown'
-person.fullName('Emmett Brown');
-person.fullName() // => 'Emmett Brown'
-```
-
-This is an interesting pattern that is used in some APIs.  But you probably don't need it when writing code for yourself.
 
 
 ## Defining static functions
