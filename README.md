@@ -1,5 +1,5 @@
 # ES6 Classes  
-# Whoa
+#   Whoa
 
 ![cell](cell.gif)
 
