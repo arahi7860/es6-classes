@@ -35,6 +35,14 @@ function () {
   var args = Array.from(arguments);
 }
 ```
-`arguments` is _not_ new to ES6 (you just may have not seen it yet) so you an use it outside of ES6.
+`arguments` is _not_ new to ES6 (you just may have not seen it yet) so you can use it outside of ES6.
 
-> As an alternative to `arguments` you may also use [rest parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters) which _is_ new to ES6.
+As an alternative to `arguments` you may also use [rest parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters) which _is_ new to ES6.
+
+```javascript
+const logNums = (...args) => {
+  args.forEach((arg) => console.log(arg));
+}
+
+listNums(2, 4, 7, 1);
+```

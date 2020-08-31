@@ -25,17 +25,17 @@ class Person {
 
   // better pattern:
 
-  getFullName () {
+  getFullName() {
     return this.firstName + ' ' + this.lastName;
   }
 
-  setFullName (val) {
-    var names = val.split(' ');
+  setFullName(val) {
+    const names = val.split(' ');
     this.firstName = names[0];
     this.lastName = names[1]; // what if there are more than two names given? how can we fix this? eg. 'David Heinemeier Hansson'
   }
 
-  fullName () {
+  fullName() {
     if (arguments.length === 0) {
       return getFullName();
     } else {
@@ -43,7 +43,7 @@ class Person {
     }
   }
 
-  static sentiment (thing) {
+  static sentiment(thing) {
     if (thing === 'poo' || thing === `spiders`) {
       console.log(`People do not like ${thing}`);
     } else {
@@ -76,9 +76,9 @@ class Programmer extends Person {
 
 // sandbox
 
-var person = new Person('Stacey', 'Mae');
+const person = new Person('Stacey', 'Mae');
 
-var programmer = new Programmer('David', 'Heinemeier Hansson', {
+const programmer = new Programmer('David', 'Heinemeier Hansson', {
   website: 'david.heinemeierhansson.com',
   githubHandle: 'dhh'
 });

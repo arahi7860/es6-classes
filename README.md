@@ -30,6 +30,9 @@ class Person {
     console.log(`Hi ${other.firstName}, I am ${this.firstName}`);
   }
 }
+
+// creating an instance of Person
+const soleil = new Person('Soleil', 'Solomon');
 ```
 
 ### ES5
@@ -52,17 +55,35 @@ Person.prototype.sayHiTo = function (other) {
 What we see above is exactly equivalent. This is just nicer syntax introduced in ES6.
 
 ### Short Practice (10 min)
-- Create a new file in your sandbox folder
-- Copy and paste the above `Person` class into the REPL
-- define two person objects and make one `sayHiTo` the other
-- Bonus: define a `getFullName` method that prints out the `Person`'s full name to the console and then call it
+- Create a new file in your sandbox called `Person.js`.
+- Copy and paste the above `Person` ES6 class into the file.
+- Define two `Person` instances and make one `sayHiTo` the other.
+- Bonus: define a `getFullName` method that prints out the `Person`'s full name to the console and then call it.
 
+## Class Inheritance
 
-## Class inheritance
+### ES6
+
+With ES6 this is super easy.  We simply use the [`extends`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends) and [`super`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super) keywords.
+
+```javascript
+// Programmer is inheriting from Person
+class Programmer extends Person {
+  constructor(firstName, lastName, options) {
+    super(firstName, lastName);
+    this.githubHandle = options.githubHandle;
+    this.website = options.website;
+  }
+
+  getResume() {
+    return `${this.firstName} ${this.lastName} \n Github: ${this.githubHandle} \n Website: ${this.website}`;
+  }
+}
+```
 
 ### ES5
 
-To create subclasses we've got our hands dirty. (A little less dirty when we use a helper function which wraps `Object.create`, an updated mechanism for generating new prototypes/objects.
+To create subclasses, however we've got our hands dirty. (A little less dirty when we use a helper function which wraps `Object.create`, an updated mechanism for generating new prototypes/objects.
 
 ```javascript
 /**
@@ -96,30 +117,6 @@ Programmer.prototype.getResume = function () {
 };
 ```
 
-
-### ES6
-
-With ES6 this is super easy.  We simply use the [`extends`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends) and [`super`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super) keywords.
-
-```javascript
-// Programmer is inheriting from Person
-class Programmer extends Person {
-  constructor (firstName, lastName, options) {
-    super(firstName, lastName);
-    this.githubHandle = options.githubHandle;
-    this.website = options.website;
-  }
-
-  getResume () {
-    return (
-      this.firstName + ' ' + this.lastName +
-      '\n' + 'Github: ' + this.githubHandle +
-      '\n' + 'Website: ' + this.website
-    );
-  }
-}
-```
-
 Notice we just call `super(firstName, lastName)` rather than `Person.call(this, firstName, lastName)`. Simple.
 
 **Important**: You must call `super` before accessing the `this` keyword. (Or you will get a nice `ReferenceError`)
@@ -131,7 +128,7 @@ We can actually call `super` in any instance method.
 class Programmer extends Person {
   /// ...
 
-  sayHiTo (other) {
+  sayHiTo(other) {
 
     // do everything that happens in the superclass method
     super.sayHiTo(other);
@@ -147,6 +144,31 @@ programmer.sayHiTo(stacey);
 // Hi Stacey, I am Ari
 // I AM A PROGRAMMER!
 ```
+
+### Short Practice: Pets
+Create an `Pet` class, and copy this code into it:
+
+```javascript
+class Pet {
+  constructor(name, legs) {
+    this.name = name;
+    this.legs = legs;
+  }
+
+  pitterPatter() {
+    console.log(`Ah, the pitter patter of ${this.legs}-legged pets.`);
+  }
+
+  begForFood() {
+    console.log(`${this.name} desires a snack.`);
+  }
+}
+```
+
+- Create two subclasses, which should extend the Pet class, one for `Dog`, and `Cat`. 
+- The constructor should also have an additional property for the pet's `sound`.
+- Create a `begForFood` method, which should call the superclass' `begForFood` method. For the dog, it should `console.log` that the dog is giving you puppy eyes. For the cat, it should `console.log` the cat's sound.
+- BONUS: Make the cat not `console.log` its sound if its name is Mittens.
 
 ## Be careful with `extends`
 In practice, you should be cautious about using `extends` and class inheritance in general.  Collective industry experience across multiple languages, problem domains, and platforms strongly suggests that deep class hierarchies yield rigid, fragile code that is quite difficult to understand and work with.  Conventional wisdom favors [object composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance).
@@ -173,13 +195,13 @@ class Person {
   }
 }
 
-var person = new Person('Marty', 'McFly');
+const person = new Person('Marty', 'McFly');
 person.fullName // => 'Marty McFly'
 ```
 
 We just called a function without using parens!
 
-Also, consider parsing a person's birthday in a getter
+Also, consider parsing a person's birthday in a getter!
 
 ```javascript
 class Person {
@@ -249,8 +271,7 @@ class Person {
 
 
 ## Lab
-Clone this repo and navigate to the `classes_lab` sub-directory.
-Follow the instructions in the README and get some practice with ES6 Classes using shapes.
+Navigate to the [JS Geometry](https://git.generalassemb.ly/sei-nyc-dragonflies/js-geometry) repo, and get hacking!
 
 ## Defining static functions
 
@@ -261,7 +282,7 @@ Static functions are those that live on the constructor, not the prototype or an
 class Person {
   /// ...
 
-  static sentiment (thing) {
+  static sentiment(thing) {
     if (thing === 'poo' || thing === `spiders`) {
       console.log(`People do not like ${thing}`);
     } else {
@@ -336,32 +357,14 @@ ES6 classes are pretty cool.  So why did we learn the traditional pattern first?
 * Most JS libraries are *not* written in ES6 classes (for the reason above)
   * [jQuery](http://code.jquery.com/jquery-3.2.1.js), [underscore](https://github.com/jashkenas/underscore/blob/master/underscore.js), etc.
 * Without understanding prototypes, ES6 classes are just "magic"
-* We enjoy making you suffer
 * Understanding where functions live is helpful for writing good/efficient code and debugging
 * In the industry some teams use traditional styles, some use ES6 classes. You gotta know both
-
-## Mini-mini-lesson: [Spread Syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)
-
-ES6 also introduced a nice way of "spreading" arrays.  It can be used to spread out function arguments or spread out an array into another.
-
-```javascript
-var arr = [3, 4, 5];
-
-someFunc(...arr);
-// => someFunc(3, 4, 5)
-// different than someFunc([3, 4, 5])
-
-[1, 2, ...arr, 6, 7];
-// => [1, 2, 3, 4, 5, 6, 7]
-// different than [1, 2, [3, 4, 5], 6, 7]
-```
-
 
 ## Resources
 
 * [MDN `class` docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+* [Prototypal Inheritance](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
 * [What's new with ES6](https://medium.com/front-end-hacking/es6-vs-es5-9254f8390332)
-* `Prototype`/`Constructor` [lecture](https://git.generalassemb.ly/wdi-nyc-delorean/LECTURE_U01_D08-prototype-inheritance) and [lab](https://git.generalassemb.ly/wdi-nyc-delorean/LAB_U01_D08-prototype-inheritance)
 * [`get`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get) and [`set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set)
 
 ## Conclusion
