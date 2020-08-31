@@ -1,5 +1,4 @@
 # ES6 Classes  
-#   Whoa
 
 ![cell](cell.gif)
 
@@ -7,21 +6,31 @@
 *After this lesson, students will be able to:*
 - Create classes and subclasses with ES6
 - Define and use getter and setter methods
-- Explain the advantages of ES6 classes over Object prototypes
-- Identify at least 2 use cases for getter/setter methods
 - Define and use class methods
 - Distinguish static methods from standard  methods
 
-
-### Preparation
-*Before this lesson, students should already:*
-- Have a good understanding of the [Prototype Inheritance lecture](https://git.generalassemb.ly/wdi-nyc-delorean/LECTURE_U01_D08-prototype-inheritance)
-  - Understand `prototype`, `constructor`, inheritance
-- Have attempted the [corresponding lab](https://git.generalassemb.ly/wdi-nyc-delorean/LAB_U01_D08-prototype-inheritance)
-
 # ES6 Classes
 
-[ES6 Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) are the new school way of writing `constructors` and methods on a `prototype`.  Let's see how this works.
+[ES6 Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) are the new school way of writing `constructors` and methods on a `prototype`. JavaScript runs on prototypal inheritance, as opposed to class inheritance, but this syntactic sugar allows to create class-like structures for OOP in JavaScript, as well as to bridge the gap from languages such as C++ and Java. Let's see how this works.
+
+
+### ES6
+
+```javascript
+class Person {
+
+  // define the constructor function
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  // define any instance method
+  sayHiTo(other) {
+    console.log(`Hi ${other.firstName}, I am ${this.firstName}`);
+  }
+}
+```
 
 ### ES5
 
@@ -40,28 +49,10 @@ Person.prototype.sayHiTo = function (other) {
 };
 ```
 
-### ES6
-
-```javascript
-class Person {
-
-  // define the constructor function
-  constructor (firstName, lastName) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-  }
-
-  // define any instance method
-  sayHiTo (other) {
-    console.log(`Hi ${other.firstName}, I am ${this.firstName}`);
-  }
-}
-```
-
 What we see above is exactly equivalent. This is just nicer syntax introduced in ES6.
 
 ### Short Practice (10 min)
-- Open a node REPL
+- Create a new file in your sandbox folder
 - Copy and paste the above `Person` class into the REPL
 - define two person objects and make one `sayHiTo` the other
 - Bonus: define a `getFullName` method that prints out the `Person`'s full name to the console and then call it
