@@ -226,13 +226,13 @@ class Person {
   // ...
 
   set fullName (val) {
-    var names = val.split(' ');
+    const names = val.split(' ');
     this.firstName = names[0];
     this.lastName = names[1];
   }
 }
 
-var person = new Person('Doc', 'Brown');
+const person = new Person('Doc', 'Brown');
 person.fullName // => 'Doc Brown'
 person.fullName = 'Emmett Brown';
 person.fullName // => 'Emmett Brown'
@@ -260,7 +260,7 @@ class Person {
   }
 
   setFullName (val) {
-    var names = val.split(' ');
+    const names = val.split(' ');
     this.firstName = names[0];
     this.lastName = names[1];
   }
