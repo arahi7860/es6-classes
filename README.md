@@ -11,7 +11,7 @@
 
 # ES6 Classes
 
-[ES6 Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) are the new school way of writing `constructors` and methods on a `prototype`. JavaScript runs on prototypal inheritance, as opposed to class inheritance, but this syntactic sugar allows to create class-like structures for OOP in JavaScript, as well as to bridge the gap from languages such as C++ and Java. Let's see how this works.
+[ES6 Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) are the new school way of writing `constructors` and methods on a `prototype`. JavaScript runs on prototypal inheritance, as opposed to class inheritance, but this syntactic sugar allows us to create class-like structures for OOP in JavaScript, as well as to bridge the gap from languages such as C++ and Java. Let's see how this works.
 
 
 ### ES6
