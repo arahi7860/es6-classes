@@ -177,6 +177,60 @@ So when should `extends` be used?  Class inheritance turns out to be quite an ef
 
 As a rule of thumb, never fear `extends` when subclassing from a class or object explicitly provided by a framework, but think twice before extending classes you yourself have written.
 
+## Lab
+Navigate to the [JS Geometry](https://git.generalassemb.ly/sei-nyc-garnet/js-geometry) repo, and get hacking!
+
+## Function.Prototype.bind()
+From mdn:
+
+> The bind() method creates a new function that, when called, has its this keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
+
+Consider the following example:
+
+```javascript
+class Person {
+  constructor() {
+    this.species = 'Human';
+  }
+
+  greet() {
+    console.log(`Hey There, I'm a ${this.species}`);
+  }
+}
+
+const drake = new Person();
+
+drake.greet();
+// => Hey There, I'm a Human
+
+let humanGreeter = drake.greet; // note: this function is not being executed
+
+// humanGreeter();
+// => throws an error
+
+humanGreeter = drake.greet.bind(drake);
+// => Hey There, I'm a Human
+
+class Dog {
+  constructor() {
+    this.species = 'Canine';
+  }
+}
+
+const peggySue = new Dog();
+const doggyGreeter = drake.greet.bind(peggySue);
+
+doggyGreeter();
+// => Hey There, I'm a Canine
+```
+
+`bind` becomes especially important when transferring behavior from a class method into a callback in a context where the class no longer available.
+
+What would happen if we passed `drake.greet` as a callback without `bind`ing an object to it?
+
+<details>
+  <summary>Hungry for more? Getters, Setters, and Static Methods</summary>
+  
 ## Getters and Setters
 
 With ES6, we can also easily define `getter`s and `setter`s.
@@ -270,9 +324,6 @@ class Person {
 > NOTE: I am just smooshing `get fullName` into `getFullName` and `set fullName` into `setFullName`.
 
 
-## Lab
-Navigate to the [JS Geometry](https://git.generalassemb.ly/sei-nyc-dragonflies/js-geometry) repo, and get hacking!
-
 ## Defining static functions
 
 Static functions are those that live on the constructor, not the prototype or any instance.  They are used for things related to the class, but not any particular instance.
@@ -300,54 +351,7 @@ Person.sentiment('poo');
 > Static functions you may recognize: `Object.create`, `Object.assign`, `Array.from`
 
 Avoid using the `this` keyword inside of static functions.  It will refer to the class itself, not any instance.  This can be a little confusing.
-
-## Function.Prototype.bind()
-From mdn:
-
-> The bind() method creates a new function that, when called, has its this keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
-
-Consider the following example:
-
-```javascript
-class Person {
-  constructor() {
-    this.species = 'Human';
-  }
-
-  greet() {
-    console.log(`Hey There, I'm a ${this.species}`);
-  }
-}
-
-const drake = new Person();
-
-drake.greet();
-// => Hey There, I'm a Human
-
-let humanGreeter = drake.greet; // note: this function is not being executed
-
-// humanGreeter();
-// => throws an error
-
-humanGreeter = drake.greet.bind(drake);
-// => Hey There, I'm a Human
-
-class Dog {
-  constructor() {
-    this.species = 'Canine';
-  }
-}
-
-const peggySue = new Dog();
-const doggyGreeter = drake.greet.bind(peggySue);
-
-doggyGreeter();
-// => Hey There, I'm a Canine
-```
-
-`bind` becomes especially important when transferring behavior from a class method into a callback in a context where the class no longer available
-
-What would happen if we passed `drake.greet` as a callback without `bind`ing an object to it?
+</details>
 
 ## Why we learned the basics first
 
