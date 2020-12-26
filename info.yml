@@ -2,11 +2,13 @@
 
 # Required fields: unit, section and type
 
-unit: (unit here)
+unit: 2
 
-section: (section here)
+section: oop
 
-type: (type here)
+prereqs: functions
+
+type: lesson
 
 
 # optional fields:
