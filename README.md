@@ -178,7 +178,7 @@ So when should `extends` be used?  Class inheritance turns out to be quite an ef
 As a rule of thumb, never fear `extends` when subclassing from a class or object explicitly provided by a framework, but think twice before extending classes you yourself have written.
 
 ## Lab
-Navigate to the [JS Geometry](https://git.generalassemb.ly/sei-nyc-garnet/js-geometry) repo, and get hacking!
+Navigate to the [JS Geometry](https://git.generalassemb.ly/sei-nyc-sapphire/js-geometry) repo, and get hacking!
 
 ## Function.Prototype.bind()
 From mdn:
