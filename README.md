@@ -5,9 +5,8 @@
 ### Objectives
 *After this lesson, students will be able to:*
 - Create classes and subclasses with ES6
-- Define and use getter and setter methods
 - Define and use class methods
-- Distinguish static methods from standard  methods
+- Understand and work with Function.prototype.bind()
 
 # ES6 Classes
 
